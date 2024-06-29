@@ -41,8 +41,12 @@ button:focus {
 img {
   transition: filter 0.5s;
 }
-a {
+a,
+a:active,
+a:visited,
+a:focus {
   text-decoration: none;
+  border: none;
 }
 /* Navigation */
 .nav {
@@ -269,12 +273,12 @@ a {
   border: none;
 }
 .modal-form {
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
 }
 .modal-form label {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin-top: 1rem;
 }
 .modal-input {
@@ -286,7 +290,7 @@ a {
   font-size: 1.2rem;
 }
 .modal input {
-  height: 3rem;
+  height: 3.5rem;
 }
 .modal input:focus {
   outline: none;
@@ -325,4 +329,13 @@ a {
 .size-modal {
   width: 85%;
   height: fit-content;
+}
+
+@media (min-width: 576px) {
+  .modal {
+    width: 55%;
+  }
+  .modal input {
+    height: 4rem;
+  }
 }

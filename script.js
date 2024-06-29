@@ -40,17 +40,19 @@ const showModalBtns = document.querySelectorAll('.show-modal-btn');
 const closeModalBtn = document.querySelector('.close-modal-btn');
 const overlay = document.querySelector('.overlay');
 
-showModalBtns.forEach(btn =>
-  btn.addEventListener('click', function (e) {
-    e.preventDefault();
-    modal.classList.add('size-modal');
-    modal.classList.remove('hidden');
-    overlay.classList.remove('hidden');
-  })
-);
-closeModalBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  modal.classList.remove('size-modal');
+const closeModal = function () {
+  modal.classList.remove('size-modal'); //for transform effect
   modal.classList.add('hidden');
   overlay.classList.add('hidden');
+};
+const showModal = function () {
+  modal.classList.add('size-modal');
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+};
+showModalBtns.forEach(btn => btn.addEventListener('click', showModal));
+closeModalBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal);
+document.addEventListener('keydown', function (e) {
+  e.key === 'Escape' && !modal.classList.contains('hidden') && closeModal();
 });
