@@ -9,6 +9,8 @@ const modal = document.querySelector('.modal');
 const showModalBtns = document.querySelectorAll('.show-modal-btn');
 const closeModalBtn = document.querySelector('.close-modal-btn');
 const overlay = document.querySelector('.overlay');
+
+////Functions
 // Nav fade effect
 const navFader = function () {
   const hoverHandler = function (e) {
@@ -26,7 +28,6 @@ const navFader = function () {
   navContainer.addEventListener('mouseover', hoverHandler.bind(0.5));
   navContainer.addEventListener('mouseout', hoverHandler.bind(1));
 };
-navFader();
 
 //Header revealing
 const headerReaveler = function () {
@@ -43,7 +44,6 @@ const headerReaveler = function () {
   });
   headerObserver.observe(header);
 };
-headerReaveler();
 
 //Modal
 const modalHandler = function () {
@@ -69,4 +69,8 @@ const modalHandler = function () {
   //   !modal.classList.contains('hidden') && modal.classList.remove('hidden');
   // });
 };
+
+////Functions calls
+navFader();
+headerReaveler();
 modalHandler();
