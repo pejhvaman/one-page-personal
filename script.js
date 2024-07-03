@@ -63,11 +63,6 @@ const modalHandler = function () {
   document.addEventListener('keydown', function (e) {
     e.key === 'Escape' && !modal.classList.contains('hidden') && closeModal();
   });
-
-  // modal.addEventListener('beforeunload', function (e) {
-  //   e.preventDefault();
-  //   !modal.classList.contains('hidden') && modal.classList.remove('hidden');
-  // });
 };
 
 ////Functions calls
