@@ -26,10 +26,10 @@
         <img class="logo" src="img/logo.png" alt="logo" />
         <ul class="nav-links">
           <li class="nav-item">
-            <a class="nav-link" href="#">Portfolio</a>
+            <a class="nav-link" href="#">About Me</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Experience</a>
+            <a class="nav-link" href="#">Portfolio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Skills</a>
@@ -49,34 +49,61 @@
           Hi<span class="comma">,</span> I<span class="comma">'</span>m <br />
           <span class="highlight">Pezhwa</span>
           <span class="highlight">Yazdan</span>
+        </h1>
           <h4>
             Web Developer <span class="comma">&</span> JavaScript Programmer
             <span class="comma">&</span> Realist Drawer
           </h4>
           <button class="btn resume-btn">Download Resume</button>
-        </h1>
       </div>
+      <div class="modal hidden">
+        <button class="close-modal-btn">&times;</button>
+        <h2 class="modal-header highlight">
+          Leave your message
+        </h2>
+        <form class="modal-form">
+          <label>Full Name</label>
+          <input class="modal-input" type="text"></input>
+          
+          <label>Subject</label>
+          <input class="modal-input" type="text"></input>
+          
+          <label>Message</label>
+          <textarea class="modal-input" type="text"></textarea>
+          
+          <label>Email</label>
+          <input class="modal-input" type="email"></input>
+          <button class="modal-btn">Send &rarr;</button>
+        </form>
+      </div>
+      <div class="overlay hidden"></div>
     </header>
-    <div class="modal hidden">
-      <button class="close-modal-btn">&times;</button>
-      <h2 class="modal-header highlight">
-        Leave your message
-      </h2>
-      <form class="modal-form">
-        <label>Full Name</label>
-        <input class="modal-input" type="text"></input>
-        
-        <label>Subject</label>
-        <input class="modal-input" type="text"></input>
-        
-        <label>Message</label>
-        <textarea class="modal-input" type="text"></textarea>
-        
-        <label>Email</label>
-        <input class="modal-input" type="email"></input>
-        <button class="modal-btn">Send &rarr;</button>
-      </form>
-    </div>
-    <div class="overlay hidden"></div>
+    <main class="main container">
+      <section class="section row" id="section--1">
+        <div class="sec-header">
+          <h1 class="sec-title">About <span class="highlight">Me</span></h1>
+          <h2 class="sec-desc">Know me better <span class="comma">...</span></h2>
+        </div>
+        <div class="about-me">
+          <img src="/img/web-developement-lazy.jpg" alt="about me" class="">
+          <div class="about-me-content">
+            <div class="about-me-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
+              
+            </div>
+            <h3 class="about-me-title">
+              <span class="highlight">Artist Web Developer</span>
+            </h3>
+            <h2 class="about-me-desc">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat itaque facilis ducimus fuga nostrum aliquam dicta beatae animi placeat molestiae error natus.
+            </h2>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    
   </body>
 </html>
