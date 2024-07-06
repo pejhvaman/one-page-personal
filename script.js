@@ -10,6 +10,7 @@ const showModalBtns = document.querySelectorAll('.show-modal-btn');
 const closeModalBtn = document.querySelector('.close-modal-btn');
 const overlay = document.querySelector('.overlay');
 const sections = document.querySelectorAll('.section');
+const lazyImages = document.querySelectorAll('.lazy-img');
 
 ////Functions
 // Nav fade effect
@@ -71,7 +72,7 @@ const sectionsRevealer = function () {
   const secRevealer = function (entries, observer) {
     const [entry] = entries;
     if (!entry.isIntersecting) return;
-    console.log(entry);
+    // console.log(entry);
     entry.target.classList.remove('sec-hidden');
     observer.unobserve(entry.target);
   };
@@ -87,26 +88,39 @@ const sectionsRevealer = function () {
   });
 };
 
-const lazyLoader = function (entries, observer) {
-  const [entry] = entries;
-  const lazy = entry.target;
-  if (!entry.isIntersecting) return;
-  const src = lazy.dataset.src;
-  lazy.src = src;
-  lazy.addEventListener('load', function () {
-    lazy.classList.remove('blur');
+const lazyImagesLoader = function () {
+  const lazyLoader = function (entries, observer) {
+    const [entry] = entries;
+    const lazy = entry.target;
+    if (!entry.isIntersecting) return;
+    const src = lazy.dataset.src;
+    lazy.src = src;
+    lazy.addEventListener('load', function () {
+      lazy.classList.remove('blur');
+    });
+    observer.unobserve(entry.target);
+  };
+
+  lazyImages.forEach(lazy => {
+    const lazyObserver = new IntersectionObserver(lazyLoader, {
+      root: null,
+      threshold: 0,
+      rootMargin: '300px',
+    });
+    lazyObserver.observe(lazy);
   });
-  observer.unobserve(entry.target);
 };
 
-const lazyImages = document.querySelectorAll('.lazy-img');
-lazyImages.forEach(lazy => {
-  const lazyObserver = new IntersectionObserver(lazyLoader, {
-    root: null,
-    threshold: 0,
-    rootMargin: '300px',
+// smooth scrollong
+navLinks.forEach(link => {
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    const href = e.target.getAttribute('href');
+    if (href) {
+      const scrollTo = document.querySelector(`${href}`);
+      scrollTo.scrollIntoView({ behavior: 'smooth' });
+    }
   });
-  lazyObserver.observe(lazy);
 });
 
 ////Functions calls
@@ -114,3 +128,4 @@ navFader();
 headerReaveler();
 modalHandler();
 sectionsRevealer();
+lazyImagesLoader();
