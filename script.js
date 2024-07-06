@@ -86,6 +86,28 @@ const sectionsRevealer = function () {
   });
 };
 
+const lazyLoader = function (entries, observer) {
+  const [entry] = entries;
+  const lazy = entry.target;
+  if (!entry.isIntersecting) return;
+  const src = lazy.dataset.src;
+  lazy.src = src;
+  lazy.addEventListener('load', function () {
+    lazy.classList.remove('blur');
+  });
+  observer.unobserve(entry.target);
+};
+
+const lazyImages = document.querySelectorAll('.lazy-img');
+lazyImages.forEach(lazy => {
+  const lazyObserver = new IntersectionObserver(lazyLoader, {
+    root: null,
+    threshold: 0,
+    // rootMargin: '150px',
+  });
+  lazyObserver.observe(lazy);
+});
+
 ////Functions calls
 navFader();
 headerReaveler();
