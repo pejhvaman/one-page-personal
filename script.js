@@ -71,6 +71,7 @@ const sectionsRevealer = function () {
   const secRevealer = function (entries, observer) {
     const [entry] = entries;
     if (!entry.isIntersecting) return;
+    console.log(entry);
     entry.target.classList.remove('sec-hidden');
     observer.unobserve(entry.target);
   };
@@ -80,7 +81,7 @@ const sectionsRevealer = function () {
     const sectionObserver = new IntersectionObserver(secRevealer, {
       root: null,
       threshold: 0,
-      rootMargin: '100px',
+      // rootMargin: '-300px',
     });
     sectionObserver.observe(sec);
   });
@@ -103,7 +104,7 @@ lazyImages.forEach(lazy => {
   const lazyObserver = new IntersectionObserver(lazyLoader, {
     root: null,
     threshold: 0,
-    // rootMargin: '150px',
+    rootMargin: '300px',
   });
   lazyObserver.observe(lazy);
 });
