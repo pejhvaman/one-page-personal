@@ -9,6 +9,7 @@ const modal = document.querySelector('.modal');
 const showModalBtns = document.querySelectorAll('.show-modal-btn');
 const closeModalBtn = document.querySelector('.close-modal-btn');
 const overlay = document.querySelector('.overlay');
+const sections = document.querySelectorAll('.section');
 
 ////Functions
 // Nav fade effect
@@ -65,7 +66,28 @@ const modalHandler = function () {
   });
 };
 
+// section revealing
+const sectionsRevealer = function () {
+  const secRevealer = function (entries, observer) {
+    const [entry] = entries;
+    if (!entry.isIntersecting) return;
+    entry.target.classList.remove('sec-hidden');
+    observer.unobserve(entry.target);
+  };
+
+  sections.forEach(sec => {
+    sec.classList.add('sec-hidden');
+    const sectionObserver = new IntersectionObserver(secRevealer, {
+      root: null,
+      threshold: 0,
+      rootMargin: '100px',
+    });
+    sectionObserver.observe(sec);
+  });
+};
+
 ////Functions calls
 navFader();
 headerReaveler();
 modalHandler();
+sectionsRevealer();
