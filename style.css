@@ -50,9 +50,8 @@ a:focus {
 }
 /* Navigation */
 .nav {
-  width: 100%;
-  padding: 4rem 0;
-  margin-bottom: 4rem;
+  position: static;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,9 +123,6 @@ a:focus {
   }
 }
 @media (min-width: 768px) {
-  .nav {
-    margin: 0 3rem 2rem 3rem;
-  }
   .nav-link:link,
   .nav-link:visited {
     margin-left: 2.5rem;
@@ -143,6 +139,7 @@ a:focus {
 }
 /* Header */
 .header {
+  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -349,6 +346,7 @@ a:focus {
 /* section */
 .section {
   transition: all 0.7s;
+  margin: 10rem 0;
 }
 .sec-hidden {
   opacity: 0;
@@ -443,5 +441,74 @@ a:focus {
   }
   .about-me-desc {
     font-size: 16px;
+  }
+}
+
+/* tabbed component */
+.tabs-container {
+  width: 100%;
+  margin: 6rem 0;
+}
+.tabs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.tab {
+  font-size: 14px;
+  border-radius: 24px;
+  cursor: pointer;
+  text-align: center;
+  margin: 0.5rem;
+  background-color: #ebb27c;
+  width: 100%;
+  transition: all 0.8s;
+  color: #34216e;
+}
+
+.tab p {
+  margin: 1.5rem 3rem;
+}
+
+.tab-active {
+  background-color: #ce73cf;
+  color: #f3f3f3;
+}
+
+.tabs-content {
+  position: relative;
+  transition: opacity 0.7s;
+}
+
+.tab-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2rem;
+}
+.tab-content-hidden {
+  visibility: hidden;
+}
+.tab-content-active {
+  visibility: visible;
+}
+.tab-content p {
+  font-size: 14px;
+}
+
+@media (min-width: 576px) {
+  .tabs {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .tab {
+    max-width: 40%;
+  }
+  .tab p {
+    font-size: 20px;
   }
 }

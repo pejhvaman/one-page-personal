@@ -150,3 +150,35 @@ sectionsRevealer();
 lazyImagesLoader();
 smoothScroller();
 navSticker();
+
+const tabsContainer = document.querySelector('.tabs');
+const tabs = document.querySelectorAll('.tab');
+const tabsContent = document.querySelector('.tabs-content');
+const tabContents = document.querySelectorAll('.tab-content');
+
+const activeTab = function (tab) {
+  tabs.forEach(t => {
+    t.classList.remove('tab-active');
+  });
+  tabs[tab].classList.add('tab-active');
+};
+
+const activeTabContent = function (content) {
+  tabContents.forEach(c => {
+    c.classList.add('tab-content-hidden');
+    c.classList.remove('tab-content-active');
+  });
+  tabContents[content].classList.add('tab-content-active');
+};
+activeTab(0);
+activeTabContent(0);
+
+tabsContainer.addEventListener('click', function (e) {
+  const tab = e.target.closest('.tab');
+  if (!tab) return;
+  // console.log(tab);
+  const tabNumber = tab.dataset.tab;
+  // console.log(tabNumber);
+  activeTab(tabNumber - 1);
+  activeTabContent(tabNumber - 1);
+});
