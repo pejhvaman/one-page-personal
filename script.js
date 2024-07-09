@@ -72,7 +72,6 @@ const sectionsRevealer = function () {
   const secRevealer = function (entries, observer) {
     const [entry] = entries;
     if (!entry.isIntersecting) return;
-    // console.log(entry);
     entry.target.classList.remove('sec-hidden');
     observer.unobserve(entry.target);
   };
@@ -82,7 +81,6 @@ const sectionsRevealer = function () {
     const sectionObserver = new IntersectionObserver(secRevealer, {
       root: null,
       threshold: 0,
-      // rootMargin: '-300px',
     });
     sectionObserver.observe(sec);
   });
@@ -111,17 +109,34 @@ const lazyImagesLoader = function () {
   });
 };
 
-// smooth scrollong
-navLinks.forEach(link => {
-  link.addEventListener('click', function (e) {
+// smooth scrolling
+const smoothScroller = function () {
+  navContainer.addEventListener('click', function (e) {
     e.preventDefault();
-    const href = e.target.getAttribute('href');
-    if (href) {
-      const scrollTo = document.querySelector(`${href}`);
-      scrollTo.scrollIntoView({ behavior: 'smooth' });
+    if (e.target.classList.contains('nav-link')) {
+      const id = e.target.getAttribute('href');
+      // console.log(id);
+      document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+    } else {
+      header.scrollIntoView({ behavior: 'smooth' }); //for icon to go home
     }
   });
+};
+
+// sticky nav
+const navHieght = navContainer.getBoundingClientRect().height;
+const main = document.querySelector('.main');
+const sticker = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) navContainer.classList.remove('nav-sticky');
+  else navContainer.classList.add('nav-sticky');
+};
+const mainObserver = new IntersectionObserver(sticker, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHieght}px`,
 });
+mainObserver.observe(main);
 
 ////Functions calls
 navFader();
@@ -129,3 +144,4 @@ headerReaveler();
 modalHandler();
 sectionsRevealer();
 lazyImagesLoader();
+smoothScroller();
