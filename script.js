@@ -11,6 +11,7 @@ const closeModalBtn = document.querySelector('.close-modal-btn');
 const overlay = document.querySelector('.overlay');
 const sections = document.querySelectorAll('.section');
 const lazyImages = document.querySelectorAll('.lazy-img');
+const main = document.querySelector('.main');
 
 ////Functions
 // Nav fade effect
@@ -116,6 +117,7 @@ const smoothScroller = function () {
     if (e.target.classList.contains('nav-link')) {
       const id = e.target.getAttribute('href');
       // console.log(id);
+      if (id === '#') return;
       document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
     } else {
       header.scrollIntoView({ behavior: 'smooth' }); //for icon to go home
@@ -124,19 +126,21 @@ const smoothScroller = function () {
 };
 
 // sticky nav
-const navHieght = navContainer.getBoundingClientRect().height;
-const main = document.querySelector('.main');
-const sticker = function (entries, observer) {
-  const [entry] = entries;
-  if (!entry.isIntersecting) navContainer.classList.remove('nav-sticky');
-  else navContainer.classList.add('nav-sticky');
+
+const navSticker = function () {
+  const navHieght = navContainer.getBoundingClientRect().height;
+  const sticker = function (entries, observer) {
+    const [entry] = entries;
+    if (!entry.isIntersecting) navContainer.classList.remove('nav-sticky');
+    else navContainer.classList.add('nav-sticky');
+  };
+  const mainObserver = new IntersectionObserver(sticker, {
+    root: null,
+    threshold: 0,
+    rootMargin: `-${navHieght * 3}px`,
+  });
+  mainObserver.observe(main);
 };
-const mainObserver = new IntersectionObserver(sticker, {
-  root: null,
-  threshold: 0,
-  rootMargin: `-${navHieght}px`,
-});
-mainObserver.observe(main);
 
 ////Functions calls
 navFader();
@@ -145,3 +149,4 @@ modalHandler();
 sectionsRevealer();
 lazyImagesLoader();
 smoothScroller();
+navSticker();

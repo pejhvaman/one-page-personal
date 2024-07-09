@@ -151,8 +151,6 @@ a:focus {
   margin-bottom: 12rem;
 }
 .header-title {
-  top: 16rem;
-  margin-top: 16rem;
   text-align: center;
   transition: transform 0.5s;
   transform: translateX(-100%);
@@ -247,7 +245,7 @@ a:focus {
   width: 0;
   height: 0;
   transform: translate(-50%, -50%);
-  z-index: 60;
+  z-index: 70;
   background-color: #f3f3f3;
   padding: 5rem 2rem 4rem 2rem;
   transition: all 0.4s;
@@ -263,7 +261,7 @@ a:focus {
   opacity: 0.7;
   backdrop-filter: blur(20px);
 
-  z-index: 5;
+  z-index: 60;
   /* scroll-behavior: unset; */
   transition: all 0.4s;
 }
