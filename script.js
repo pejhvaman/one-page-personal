@@ -27,7 +27,7 @@ const navFader = function () {
       const siblings = link.closest('.nav').querySelectorAll('.nav-link');
       const logo = link.closest('.nav').querySelector('img');
       siblings.forEach(sibling => {
-        if (sibling != link) sibling.style.opacity = this;
+        if (sibling !== link) sibling.style.opacity = this;
       });
       logo.style.opacity = this;
     }
@@ -141,7 +141,7 @@ const navSticker = function () {
   const mainObserver = new IntersectionObserver(sticker, {
     root: null,
     threshold: 0,
-    rootMargin: `-${navHieght * 3}px`,
+    rootMargin: `-${navHieght * 2}px`,
   });
   mainObserver.observe(main);
 };
@@ -175,6 +175,32 @@ const tabbedComponent = function () {
     activeTabContent(tabNumber - 1);
   });
 };
+
+// footer hover effect
+const handleHover = function (e, className, parentClass, opac) {
+  e.preventDefault();
+  if (e.target.classList.contains(className)) {
+    // console.log('yes');
+    const target = e.target;
+    const siblings = target
+      .closest(`.${parentClass}`)
+      .querySelectorAll(`.${className}`);
+    siblings.forEach(sib => {
+      if (sib !== target) sib.style.opacity = opac;
+    });
+  }
+};
+
+const footer = document.querySelector('.footer');
+const footerNav = document.querySelector('.footer-nav');
+const footerImg = document.querySelector('.footer-img');
+
+footerNav.addEventListener('mouseover', function (e) {
+  handleHover(e, 'footer-nav-item', 'footer-nav', 0.5);
+});
+footerNav.addEventListener('mouseout', function (e) {
+  handleHover(e, 'footer-nav-item', 'footer-nav', 1);
+});
 
 ////Functions calls
 navFader();
