@@ -275,4 +275,4 @@ smoothScroller();
 navSticker();
 tabbedComponent();
 slider();
-footer();
+footerEffect();

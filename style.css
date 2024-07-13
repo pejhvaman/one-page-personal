@@ -498,6 +498,7 @@ a:focus {
   transition: opacity 0.7s;
   position: relative;
   height: 300px;
+  margin-bottom: 20rem;
 }
 
 .tab-content {
@@ -699,6 +700,13 @@ a:focus {
   backdrop-filter: blur(12px);
   cursor: pointer;
   z-index: 10;
+}
+
+.slider-btn:focus,
+.slider-btn:active {
+  outline-style: none;
+  border: unset;
+  border: 1px solid var(--color-primary-darker);
 }
 
 .slider-btn-left {
