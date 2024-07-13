@@ -16,8 +16,16 @@ const tabsContainer = document.querySelector('.tabs');
 const tabs = document.querySelectorAll('.tab');
 const tabsContent = document.querySelector('.tabs-content');
 const tabContents = document.querySelectorAll('.tab-content');
-
+const footer = document.querySelector('.footer');
+const footerNav = document.querySelector('.footer-nav');
+const footerImg = document.querySelector('.footer-img');
+const sliderEl = document.querySelector('.slides');
+const slides = document.querySelectorAll('.slide');
+const sliderBtnRight = document.querySelector('.slider-btn-right');
+const sliderBtnLeft = document.querySelector('.slider-btn-left');
+const dotsContainer = document.querySelector('.dots');
 ////Functions
+
 // Nav fade effect
 const navFader = function () {
   const hoverHandler = function (e) {
@@ -176,31 +184,86 @@ const tabbedComponent = function () {
   });
 };
 
-// footer hover effect
-const handleHover = function (e, className, parentClass, opac) {
-  e.preventDefault();
-  if (e.target.classList.contains(className)) {
-    // console.log('yes');
-    const target = e.target;
-    const siblings = target
-      .closest(`.${parentClass}`)
-      .querySelectorAll(`.${className}`);
-    siblings.forEach(sib => {
-      if (sib !== target) sib.style.opacity = opac;
+// slider
+const slider = function () {
+  let curSlide = 0;
+  const maxSlide = slides.length;
+  const goToSlide = function (slide) {
+    slides.forEach((s, i) => {
+      s.style.transform = `translateX(${(i - slide) * 100}%)`;
     });
-  }
+  };
+  goToSlide(0);
+
+  const nextSlide = function () {
+    if (curSlide === maxSlide - 1) curSlide = 0;
+    else curSlide++;
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+  const prevSlide = function () {
+    if (curSlide === 0) curSlide = maxSlide - 1;
+    else curSlide--;
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  sliderBtnRight.addEventListener('click', nextSlide);
+  sliderBtnLeft.addEventListener('click', prevSlide);
+
+  const createDots = function () {
+    slides.forEach((s, i) => {
+      const dot = `<button class="dot" data-slide="${i}"></button>`;
+      dotsContainer.insertAdjacentHTML('beforeend', dot);
+    });
+  };
+  createDots();
+
+  const activateDot = function (dot) {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach(d => d.classList.remove('dot-active'));
+    document
+      .querySelector(`.dot[data-slide="${dot}"`)
+      .classList.add('dot-active');
+  };
+  activateDot(0);
+
+  dotsContainer.addEventListener('click', function (e) {
+    const slide = +e.target.dataset.slide;
+    goToSlide(slide);
+    activateDot(slide);
+    curSlide = slide;
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') prevSlide();
+    if (e.key === 'ArrowRight') nextSlide();
+  });
 };
 
-const footer = document.querySelector('.footer');
-const footerNav = document.querySelector('.footer-nav');
-const footerImg = document.querySelector('.footer-img');
+// footer hover effect
+const footerEffect = function () {
+  const handleHover = function (e, className, parentClass, opac) {
+    e.preventDefault();
+    if (e.target.classList.contains(className)) {
+      // console.log('yes');
+      const target = e.target;
+      const siblings = target
+        .closest(`.${parentClass}`)
+        .querySelectorAll(`.${className}`);
+      siblings.forEach(sib => {
+        if (sib !== target) sib.style.opacity = opac;
+      });
+    }
+  };
 
-footerNav.addEventListener('mouseover', function (e) {
-  handleHover(e, 'footer-nav-item', 'footer-nav', 0.5);
-});
-footerNav.addEventListener('mouseout', function (e) {
-  handleHover(e, 'footer-nav-item', 'footer-nav', 1);
-});
+  footerNav.addEventListener('mouseover', function (e) {
+    handleHover(e, 'footer-nav-item', 'footer-nav', 0.5);
+  });
+  footerNav.addEventListener('mouseout', function (e) {
+    handleHover(e, 'footer-nav-item', 'footer-nav', 1);
+  });
+};
 
 ////Functions calls
 navFader();
@@ -211,65 +274,5 @@ lazyImagesLoader();
 smoothScroller();
 navSticker();
 tabbedComponent();
-
-// Slider
-
-const slider = document.querySelector('.slides');
-const slides = document.querySelectorAll('.slide');
-const sliderBtnRight = document.querySelector('.slider-btn-right');
-const sliderBtnLeft = document.querySelector('.slider-btn-left');
-const dotsContainer = document.querySelector('.dots');
-
-let curSlide = 0;
-const maxSlide = slides.length;
-const goToSlide = function (slide) {
-  slides.forEach((s, i) => {
-    s.style.transform = `translateX(${(i - slide) * 100}%)`;
-  });
-};
-goToSlide(0);
-
-const nextSlide = function () {
-  if (curSlide === maxSlide - 1) curSlide = 0;
-  else curSlide++;
-  goToSlide(curSlide);
-  activateDot(curSlide);
-};
-const prevSlide = function () {
-  if (curSlide === 0) curSlide = maxSlide - 1;
-  else curSlide--;
-  goToSlide(curSlide);
-  activateDot(curSlide);
-};
-
-sliderBtnRight.addEventListener('click', nextSlide);
-sliderBtnLeft.addEventListener('click', prevSlide);
-
-const createDots = function () {
-  slides.forEach((s, i) => {
-    const dot = `<button class="dot" data-slide="${i}"></button>`;
-    dotsContainer.insertAdjacentHTML('beforeend', dot);
-  });
-};
-createDots();
-
-const activateDot = function (dot) {
-  const dots = document.querySelectorAll('.dot');
-  dots.forEach(d => d.classList.remove('dot-active'));
-  document
-    .querySelector(`.dot[data-slide="${dot}"`)
-    .classList.add('dot-active');
-};
-activateDot(0);
-
-dotsContainer.addEventListener('click', function (e) {
-  const slide = +e.target.dataset.slide;
-  goToSlide(slide);
-  activateDot(slide);
-  curSlide = slide;
-});
-
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'ArrowLeft') prevSlide();
-  if (e.key === 'ArrowRight') nextSlide();
-});
+slider();
+footer();
