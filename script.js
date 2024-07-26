@@ -131,8 +131,6 @@ const smoothScroller = function () {
       // console.log(id);
       if (id === '#') return;
       document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-    } else {
-      header.scrollIntoView({ behavior: 'smooth' }); //for icon to go home
     }
   });
 };

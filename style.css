@@ -247,6 +247,7 @@ a:focus {
   background-color: #f3f3f3;
   padding: 5rem 2rem 4rem 2rem;
   transition: all 0.4s;
+  border-radius: 12px;
 }
 
 .overlay {
